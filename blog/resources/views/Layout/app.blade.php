@@ -2,6 +2,7 @@
 <head>
     <title> @yield('title') </title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
     
 </head>
 <body>

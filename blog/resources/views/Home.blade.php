@@ -14,7 +14,7 @@
                          <h4>Laravel axios multiple File Upload </h4>
                      </div>
                      <div class="card-body">
-                         <button class="btn btn-primary btn-sm">Add File</button>
+                         <button class="btn addBtn btn-primary btn-sm">Add File</button>
                          <table class="table table-striped">
                               <thead>
                                     <tr>
@@ -22,15 +22,12 @@
                                         <th>File Size</th>
                                         <th>Cancel</th>
                                         <th>Upload</th>
+                                        <th>Uploaded(MB)</th>
+                                        <th>Uploaded(%)</th>
+                                        <th>Status</th>
                                     </tr>
                               </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>File</td>
-                                      <td>File Size</td>
-                                      <td><button class="btn btn-danger btn-sm">Cancel</button></td>
-                                      <td><button class="btn btn-primary btn-sm">Cancel</button></td>
-                                  </tr>
+                              <tbody class="fileList">
 
                               </tbody>
                              
