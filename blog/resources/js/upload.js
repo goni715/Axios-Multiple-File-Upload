@@ -42,11 +42,85 @@ $('.addBtn').on('click', function(){
 
 
 
+        $('.upBtn').on('click',function(event){
+
+              let MyFile = $(this).closest('tr').find('.fileInput').prop('files')[0];
+              let fileUpMB = $(this).closest('tr').find('.fileUpMB');
+              let fileUpPercentage = $(this).closest('tr').find('.fileUpPercentage');
+              let fileStatus = $(this).closest('tr').find('.fileStatus');
+              let UpBtn = $(this);
+
+              let formData = new FormData();
+              formData.append('FileKey',MyFile);
+            
+
+               OnFileUpload(formData, fileUpMB, fileUpPercentage, fileStatus, UpBtn);
+
+               event.preventDefault();
+               event.stopImmediatePropagation();
+
+
+        });
+
+
+
+
 });
 
 
 
- //Remove Row
+
+
+
+function OnFileUpload(formData, fileUpMB, fileUpPercentage, fileStatus, UpBtn){
+
+      fileStatus.html('Uploading...');
+      UpBtn.prop('disabled',true);
+
+       let url='./fileUp';
+       let config={
+             headers:{'content-type':'multipart/form-data'},
+             onUploadProgress:function (progressEvent){
+
+                   let uploadedMB = ((progressEvent.loaded)/(1024*1024)).toFixed(2);
+                   let uploadedPercentage = Math.round((progressEvent.loaded*100)/(progressEvent.total));
+
+                   fileUpMB.html(uploadedMB+ "MB");
+                   fileUpPercentage.html(uploadedPercentage+ "%");
+                   
+             }
+       }
+
+
+
+        axios.post(url, formData, config)
+             .then(function(response){
+
+                 if(response.status==200){
+                     
+                     fileStatus.html('Success');  
+                     UpBtn.prop('disabled',false);            
+                 }else{
+                     fileStatus.html('Fail');
+                     UpBtn.prop('disabled',false);
+                 }
+                  
+             }).catch(function(error){
+
+                  fileStatus.html('Fail');
+                  UpBtn.prop('disabled',false);
+             })
+
+
+
+
+
+
+}
+
+
+
+
   
 
 
